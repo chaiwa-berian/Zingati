@@ -1,10 +1,11 @@
 package com.bantu.industrial.zingati;
 
+import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
 
-public class SearchableActivity extends AppCompatActivity {
+public class SearchableActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
