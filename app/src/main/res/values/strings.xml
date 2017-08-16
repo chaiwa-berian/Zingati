@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Zingati</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_stock_control">Stock Control</string>
+    <string name="action_stock_list">Stock Reports</string>
+    <string name="action_sales_report">Sales Reports</string>
+    <string name="action_logout">Log-Out</string>
+    <string name="action_tools">Tools</string>
+    <string name="action_share">Share</string>
+    <string name="action_send">Send</string>
+    <string name="action_search">Search</string>
+    <string name="title_communicate">Communicate</string>
+    <string name="title_manage">Manage</string>
+    <string name="title_about">About Zingati App</string>
+    <string name="title_practice_mode">Demo Mode</string>
+    <string name="title_app_manager">App Manager</string>
+</resources>
