@@ -24,6 +24,10 @@ public class SearchableActivity extends ListActivity {
     }
 
     private void doMySearch(String query) {
-        
+        //Return Search Results
+        Intent intent= new Intent();
+        Bundle bundle = new Bundle();
+
+        //bundle.put;
     }
 }

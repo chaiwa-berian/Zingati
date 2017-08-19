@@ -9,6 +9,12 @@
         app:showAsAction="always"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
     <item
+        android:id="@+id/action_scan"
+        android:orderInCategory="102"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="@string/action_scan"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_practice"
         android:orderInCategory="103"
         android:title="@string/title_practice_mode"

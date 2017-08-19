@@ -19,4 +19,6 @@
     <string name="title_practice_mode">Demo Mode</string>
     <string name="title_app_manager">App Manager</string>
     <string name="search_hint">Search product by ID</string>
+    <string name="action_scan">Scan</string>
+    <string name="title_barcode">Barcode</string>
 </resources>
