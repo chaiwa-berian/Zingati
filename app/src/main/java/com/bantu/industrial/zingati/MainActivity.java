@@ -1,5 +1,6 @@
 package com.bantu.industrial.zingati;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -57,37 +58,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                TextView txtView = (TextView) findViewById(R.id.txtContent);
-
-                ImageView imgView = (ImageView) findViewById(R.id.imgView);
-                //This step could potentially be replaced with getting image via Camera, but for now
-                //we use the image in the application folder
-                Bitmap imgBitmap = BitmapFactory.decodeResource(
-                        getApplicationContext().getResources(),R.drawable.puppy);
-
-                imgView.setImageBitmap(imgBitmap);
-
-                //We now setup the Barcode Detector
-                BarcodeDetector detector=
-                        new BarcodeDetector.Builder(getApplicationContext())
-                        .setBarcodeFormats(Barcode.DATA_MATRIX | Barcode.QR_CODE)
-                        .build();
-                if (!detector.isOperational()){
-                    txtView.setText("Could not setup the detector!");
-                    return;
-                }
-
-                //Detect the Barcode
-                //it creates a frame from the bitmap, and passes it to the detector.
-                // This returns a SparseArray of barcodes.
-                Frame frame = new Frame.Builder().setBitmap(imgBitmap).build();
-                SparseArray<Barcode> barcodes=detector.detect(frame);
-
-                //Decode the Barcode
-                //Typically in this step you would iterate through the SparseArray,
-                // and process each bar code independently.
-                Barcode thisCode = barcodes.valueAt(0);
-                txtView.setText(thisCode.rawValue);
 
             }
         });
@@ -107,24 +77,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
-        //If you need to update your activity based on the visibility of your action view,
-        // you can receive callbacks when the action is expanded and collapsed by defining
-        // an OnActionExpandListener and passing it to setOnActionExpandListener().
-       /* MenuItem searchView = (MenuItem) findViewById(R.id.action_search);
-
-        MenuItemCompat.setOnActionExpandListener(searchView, new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                return true; //Return true to collapse action view
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                return true; //Return true to expand action view
-            }
-        });
-        */
         return true;
     }
 
@@ -180,6 +132,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onScanClick(View view){
+        Intent intent = new Intent();
+        //startActivity(intent, );
         Snackbar.make(view,"Scan in progress...", Snackbar.LENGTH_SHORT).setAction("No Action",null).show();
     }
     public void onSearchClick(View view){
