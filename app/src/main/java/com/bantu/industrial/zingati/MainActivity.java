@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity
                 //Typically in this step you would iterate through the SparseArray,
                 // and process each bar code independently.
                 Barcode thisCode = barcodes.valueAt(0);
-                txtView.setText(thisCode.rawValue().toString());
+                txtView.setText(thisCode.rawValue);
 
             }
         });
