@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     CoordinatorLayout coordinatorLayout;
+    int item_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+        this.item_count=0;
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -124,7 +126,6 @@ public class MainActivity extends AppCompatActivity
     public void onScanClick(View view){
         Intent intent = new Intent(this, BarcodeScanner.class);
         startActivityForResult(intent,0);
-        Snackbar.make(view,"Scan in progress...", Snackbar.LENGTH_SHORT).setAction("No Action",null).show();
     }
 
     @Override
@@ -132,13 +133,21 @@ public class MainActivity extends AppCompatActivity
         if (requestCode==0){
             if (resultCode== CommonStatusCodes.SUCCESS){
                 if (data != null){
+                    item_count++;
                     Barcode barcode = data.getParcelableExtra("barcode");
                     TextView barcodeResultView = (TextView)findViewById(R.id.txtContent);
                     barcodeResultView.setText("Barcode value: "+barcode.displayValue);
+                    Snackbar.make(coordinatorLayout,item_count+" items scanned!", Snackbar.LENGTH_LONG).setAction(R.string.action_scan,
+                            new View.OnClickListener(){
 
+                                @Override
+                                public void onClick(View view) {
+                                    onScanClick(view);
+                                }
+                            }).show();
                 }
                 else{
-                    Snackbar.make(coordinatorLayout,"No Barcode Found",Snackbar.LENGTH_SHORT);
+                    Snackbar.make(coordinatorLayout,"No Barcode Found",Snackbar.LENGTH_SHORT).show();
                 }
 
             }
