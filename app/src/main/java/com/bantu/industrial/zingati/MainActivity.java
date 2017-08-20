@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
@@ -50,17 +51,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //Get Scan Button, this for testing only
-        Button scanButton = (Button) findViewById(R.id.scanButton);
-        scanButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
     }
 
     @Override
@@ -132,10 +122,33 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onScanClick(View view){
-        Intent intent = new Intent();
-        //startActivity(intent, );
+        Intent intent = new Intent(this, BarcodeScanner.class);
+        startActivityForResult(intent,0);
         Snackbar.make(view,"Scan in progress...", Snackbar.LENGTH_SHORT).setAction("No Action",null).show();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==0){
+            if (resultCode== CommonStatusCodes.SUCCESS){
+                if (data != null){
+                    Barcode barcode = data.getParcelableExtra("barcode");
+                    TextView barcodeResultView = (TextView)findViewById(R.id.txtContent);
+                    barcodeResultView.setText("Barcode value: "+barcode.displayValue);
+
+                }
+                else{
+                    Snackbar.make(coordinatorLayout,"No Barcode Found",Snackbar.LENGTH_SHORT);
+                }
+
+            }
+
+        }else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+
+    }
+
     public void onSearchClick(View view){
         Snackbar.make(view,"Search in progress...", Snackbar.LENGTH_SHORT).setAction("No Action",null).show();
     }

@@ -29,11 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtContent"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_scan"
-            android:id="@+id/scanButton"/>
         <ImageView
             android:contentDescription="@string/title_barcode"
             android:layout_width="wrap_content"
