@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     CoordinatorLayout coordinatorLayout;
     int item_count;
+    ListView product_cart = (ListView)findViewById(R.id.lv_product_cart);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,8 +137,10 @@ public class MainActivity extends AppCompatActivity
                 if (data != null){
                     item_count++;
                     Barcode barcode = data.getParcelableExtra("barcode");
-                    TextView barcodeResultView = (TextView)findViewById(R.id.txtContent);
-                    barcodeResultView.setText("Barcode value: "+barcode.displayValue);
+
+                    //product_cart.add
+
+
                     Snackbar.make(coordinatorLayout,item_count+" items scanned!", Snackbar.LENGTH_LONG).setAction(R.string.action_scan,
                             new View.OnClickListener(){
 
