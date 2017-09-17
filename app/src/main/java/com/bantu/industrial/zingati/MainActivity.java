@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     CoordinatorLayout coordinatorLayout;
     int item_count;
-    ListView product_cart = (ListView)findViewById(R.id.lv_product_cart);
+    //ListView product_cart = (ListView)findViewById(R.id.lv_product_cart);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

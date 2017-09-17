@@ -35,31 +35,33 @@ public class ProductCartLoader extends ListActivity implements LoaderManager.Loa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_cart_loader);
+        //setContentView(R.layout.activity_product_cart_loader);
 
-        //Create a progress bar to display while the list loads
-        ProgressBar progressBar = new ProgressBar(this);
-        progressBar.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
-                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER));
-        progressBar.setIndeterminate(true);
-        getListView().setEmptyView(progressBar);
-
-        //Must add the layout to the root of the layout
-        ViewGroup root = findViewById(R.id.coordinator_layout);
-        root.addView(progressBar);
+//        //Create a progress bar to display while the list loads
+//        ProgressBar progressBar = new ProgressBar(this);
+//        progressBar.setLayoutParams(new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+//                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.CENTER));
+//        progressBar.setIndeterminate(true);
+//        getListView().setEmptyView(progressBar);
+//
+//        //Must add the layout to the root of the layout
+//        ViewGroup root = findViewById(R.id.coordinator_layout);
+//        root.addView(progressBar);
 
         //For the cursor adapter, specify which columns go into which views
         String[] fromColumns  = {ContactsContract.Data.DISPLAY_NAME};
-        int[] toViews = {R.id.list_item};// The TextView in activity_product_cart_loader
+        int[] toViews = {R.id.txtView};// The TextView in activity_product_cart_loader
 
         //Create an empty adapter we will use to display the loaded data
         //We pass null for the cursor, then update in onLoadFinished
-        mAdapter=new SimpleCursorAdapter(this,
+        mAdapter=new SimpleCursorAdapter(getApplicationContext(),
                 R.layout.activity_product_cart_loader,null,
                 fromColumns,toViews,0);
-
+        ListView listView = getListView();
+        listView.setAdapter(mAdapter);
+        setListAdapter(mAdapter);
         //Prepare the Loader . Either re-connect with existing one, or start a new one
-        getLoaderManager().initLoader(0,null,this);
+        //getLoaderManager().initLoader(0,null,this);
 
     }
 
@@ -73,17 +75,6 @@ public class ProductCartLoader extends ListActivity implements LoaderManager.Loa
                 PROJECTION,SELECTION,null,null);
     }
 
-//    @Override
-//    public void onLoadFinished(Loader loader, Object o) {
-//
-//    }
-
-//    @Override
-//    public void onLoaderReset(Loader loader) {
-//
-//    }
-
-    // Called when a previously created loader has finished loading
     @Override
     public void onLoadFinished(Loader loader, Object data) {
         //Swap the new Cursor in. (The framework will take care of closing the old cursor once
